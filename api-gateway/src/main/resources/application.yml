@@ -9,6 +9,7 @@ spring:
     gateway:
       server:
         webflux:
+
           routes:
 
             # =========================
@@ -71,13 +72,24 @@ spring:
               filters:
                 - RewritePath=/api/public/courses, /courses
 
-      # CORS - chuẩn bị cho frontend
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: "http://localhost:5173"
-            allowedMethods: "*"
-            allowedHeaders: "*"
+          # =========================
+          # CORS CHO REACT FRONTEND
+          # =========================
+          globalcors:
+            add-to-simple-url-handler-mapping: true
+            cors-configurations:
+              '[/**]':
+                allowedOrigins:
+                  - "http://localhost:5173"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - PATCH
+                  - OPTIONS
+                allowedHeaders:
+                  - "*"
 
 jwt:
   secret: CRS-Microservices-Secret-Key-Nam-3-Hoc-Ky-2026-Doi-Trong-Thuc-Te
